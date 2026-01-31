@@ -1,0 +1,172 @@
+{
+  "seedInstructions": "To seed the database, use MongoDB Compass or run these commands in MongoDB shell",
+  "adminUser": {
+    "name": "Admin User",
+    "email": "admin@mobileshop.com",
+    "password": "admin123",
+    "role": "admin",
+    "address": "123 Admin Street, City, Country",
+    "phone": "+1234567890"
+  },
+  "staffUser": {
+    "name": "Staff Member",
+    "email": "staff@mobileshop.com",
+    "password": "staff123",
+    "role": "staff",
+    "address": "456 Staff Avenue, City, Country",
+    "phone": "+1234567891"
+  },
+  "regularUser": {
+    "name": "John Doe",
+    "email": "user@example.com",
+    "password": "user123",
+    "role": "user",
+    "address": "789 User Lane, City, Country",
+    "phone": "+1234567892"
+  },
+  "categories": [
+    {
+      "name": "Smartphones",
+      "isActive": true
+    },
+    {
+      "name": "Tablets",
+      "isActive": true
+    },
+    {
+      "name": "Accessories",
+      "isActive": true
+    },
+    {
+      "name": "Smart Watches",
+      "isActive": true
+    }
+  ],
+  "sampleProducts": [
+    {
+      "brand": "Samsung",
+      "modelName": "Galaxy S23 Ultra",
+      "description": "Premium flagship smartphone with 200MP camera and S Pen support. Features the latest Snapdragon processor for incredible performance.",
+      "price": 1199.99,
+      "discount": 10,
+      "stock": 25,
+      "specs": {
+        "ram": "12GB",
+        "storage": "256GB",
+        "color": "Phantom Black"
+      },
+      "isApproved": true,
+      "createdByRole": "admin"
+    },
+    {
+      "brand": "Apple",
+      "modelName": "iPhone 15 Pro Max",
+      "description": "The most advanced iPhone ever with titanium design, A17 Pro chip, and revolutionary camera system.",
+      "price": 1399.99,
+      "discount": 5,
+      "stock": 30,
+      "specs": {
+        "ram": "8GB",
+        "storage": "512GB",
+        "color": "Natural Titanium"
+      },
+      "isApproved": true,
+      "createdByRole": "admin"
+    },
+    {
+      "brand": "Google",
+      "modelName": "Pixel 8 Pro",
+      "description": "Google's flagship phone with AI-powered camera features and pure Android experience.",
+      "price": 999.99,
+      "discount": 15,
+      "stock": 20,
+      "specs": {
+        "ram": "12GB",
+        "storage": "256GB",
+        "color": "Obsidian"
+      },
+      "isApproved": true,
+      "createdByRole": "admin"
+    },
+    {
+      "brand": "OnePlus",
+      "modelName": "OnePlus 12",
+      "description": "Fast charging flagship with Hasselblad camera system and smooth 120Hz display.",
+      "price": 799.99,
+      "discount": 0,
+      "stock": 15,
+      "specs": {
+        "ram": "16GB",
+        "storage": "512GB",
+        "color": "Flowy Emerald"
+      },
+      "isApproved": true,
+      "createdByRole": "admin"
+    },
+    {
+      "brand": "Xiaomi",
+      "modelName": "Xiaomi 14 Pro",
+      "description": "Leica-engineered cameras with powerful Snapdragon 8 Gen 3 processor.",
+      "price": 899.99,
+      "discount": 12,
+      "stock": 18,
+      "specs": {
+        "ram": "12GB",
+        "storage": "256GB",
+        "color": "Titanium Gray"
+      },
+      "isApproved": true,
+      "createdByRole": "admin"
+    },
+    {
+      "brand": "Samsung",
+      "modelName": "Galaxy Z Fold 5",
+      "description": "Premium foldable smartphone with versatile form factor and multitasking capabilities.",
+      "price": 1799.99,
+      "discount": 8,
+      "stock": 10,
+      "specs": {
+        "ram": "12GB",
+        "storage": "512GB",
+        "color": "Phantom Black"
+      },
+      "isApproved": true,
+      "createdByRole": "admin"
+    },
+    {
+      "brand": "Apple",
+      "modelName": "iPhone 14",
+      "description": "Reliable performance with advanced camera system and all-day battery life.",
+      "price": 799.99,
+      "discount": 20,
+      "stock": 35,
+      "specs": {
+        "ram": "6GB",
+        "storage": "128GB",
+        "color": "Blue"
+      },
+      "isApproved": true,
+      "createdByRole": "admin"
+    },
+    {
+      "brand": "Google",
+      "modelName": "Pixel 7a",
+      "description": "Mid-range phone with flagship camera features at an affordable price.",
+      "price": 499.99,
+      "discount": 10,
+      "stock": 40,
+      "specs": {
+        "ram": "8GB",
+        "storage": "128GB",
+        "color": "Sea"
+      },
+      "isApproved": true,
+      "createdByRole": "admin"
+    }
+  ],
+  "notes": {
+    "passwordHashing": "Note: Passwords will be hashed automatically by the User model pre-save hook",
+    "categoryID": "When creating products, you need to use the actual ObjectId of the category from your database",
+    "images": "Images should be uploaded through the API endpoints using Multer. Place sample images in the uploadedimage folders."
+  }
+}
