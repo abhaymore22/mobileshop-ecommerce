@@ -179,7 +179,7 @@ function AdminCategoriesScreen() {
                       <td>
                         {category.imagePath && (
                           <img
-                            src={`http://localhost:5000${category.imagePath}`}
+                            src={category.imagePath.startsWith('http') ? category.imagePath : `http://localhost:5000${category.imagePath}`}
                             alt={category.name}
                             style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                           />

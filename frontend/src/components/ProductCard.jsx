@@ -35,8 +35,10 @@ function ProductCard({ product }) {
   };
 
   const discountedPrice = product.price - (product.price * product.discount / 100);
+  
+  // Handle both Cloudinary URLs (absolute) and local paths (relative)
   const imageUrl = product.images?.[0] 
-    ? `http://localhost:5000${product.images[0]}` 
+    ? (product.images[0].startsWith('http') ? product.images[0] : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${product.images[0]}`)
     : 'https://via.placeholder.com/300x300?text=No+Image';
 
   return (

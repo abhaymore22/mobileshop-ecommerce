@@ -145,7 +145,7 @@ function HomeScreen() {
           <div className="row g-3">
             {activeCategories.map((category) => {
               const imageUrl = category.imagePath 
-                ? `http://localhost:5000${category.imagePath}` 
+                ? (category.imagePath.startsWith('http') ? category.imagePath : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${category.imagePath}`)
                 : 'https://via.placeholder.com/200x150?text=Category';
               
               return (

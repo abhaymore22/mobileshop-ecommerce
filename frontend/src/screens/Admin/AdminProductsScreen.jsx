@@ -237,7 +237,7 @@ function AdminProductsScreen() {
                       <td>
                         {product.images?.[0] && (
                           <img
-                            src={`http://localhost:5000${product.images[0]}`}
+                            src={product.images[0].startsWith('http') ? product.images[0] : `http://localhost:5000${product.images[0]}`}
                             alt={product.modelName}
                             style={{ width: '50px', height: '50px', objectFit: 'cover' }}
                           />

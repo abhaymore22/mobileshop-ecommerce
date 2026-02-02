@@ -110,7 +110,7 @@ function CartScreen() {
                   if (!product) return null;
                   
                   const imageUrl = product.images?.[0] 
-                    ? `http://localhost:5000${product.images[0]}` 
+                    ? (product.images[0].startsWith('http') ? product.images[0] : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${product.images[0]}`)
                     : 'https://via.placeholder.com/100';
                   const price = product.price || 0;
                   const discount = product.discount || 0;

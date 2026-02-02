@@ -112,7 +112,7 @@ function ProductDetailScreen() {
 
   const discountedPrice = product.price - (product.price * product.discount / 100);
   const images = product.images?.length > 0 
-    ? product.images.map(img => `http://localhost:5000${img}`)
+    ? product.images.map(img => img.startsWith('http') ? img : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${img}`)
     : ['https://via.placeholder.com/500x500?text=No+Image'];
 
   return (

@@ -35,7 +35,7 @@ function OrderDetailScreen() {
               {order.items?.map((item) => {
                 const product = item.productID;
                 const imageUrl = product?.images?.[0]
-                  ? `http://localhost:5000${product.images[0]}`
+                  ? (product.images[0].startsWith('http') ? product.images[0] : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${product.images[0]}`)
                   : 'https://via.placeholder.com/100';
 
                 return (

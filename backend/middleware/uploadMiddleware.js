@@ -1,38 +1,6 @@
 import multer from 'multer';
 import path from 'path';
-
-// Storage configuration for user profile images
-const userStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploadedimage/users/');
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, 'user-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
-
-// Storage configuration for category images
-const categoryStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploadedimage/categories/');
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, 'category-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
-
-// Storage configuration for product images
-const productStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploadedimage/products/');
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, 'product-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+import { userStorage, categoryStorage, productStorage } from '../config/cloudinaryConfig.js';
 
 // File filter to accept only images
 const fileFilter = (req, file, cb) => {
@@ -47,7 +15,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Export multer instances
+// Export multer instances with Cloudinary storage
 export const uploadUserImage = multer({
   storage: userStorage,
   fileFilter,

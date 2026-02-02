@@ -63,7 +63,7 @@ export const createCategory = async (req, res) => {
     const category = await Category.create({
       name,
       isActive: isActive !== undefined ? isActive : true,
-      imagePath: req.file ? '/uploadedimage/categories/' + req.file.filename : ''
+      imagePath: req.file ? req.file.path : ''
     });
 
     console.log('Category created successfully:', category._id);
@@ -86,7 +86,7 @@ export const updateCategory = async (req, res) => {
       category.isActive = req.body.isActive !== undefined ? req.body.isActive : category.isActive;
 
       if (req.file) {
-        category.imagePath = '/uploadedimage/categories/' + req.file.filename;
+        category.imagePath = req.file.path;
       }
 
       const updatedCategory = await category.save();
