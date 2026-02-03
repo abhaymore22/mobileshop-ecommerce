@@ -79,11 +79,10 @@ const Chatbot = () => {
 
       {/* Chat Modal */}
       <div
-        className="position-fixed"
+        className="position-fixed chatbot-window"
         style={{
           bottom: '2rem',
           right: '2rem',
-          width: '400px',
           maxHeight: '650px',
           zIndex: 1050
         }}

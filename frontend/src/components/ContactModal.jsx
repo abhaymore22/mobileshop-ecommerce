@@ -145,7 +145,7 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal show d-block" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} onClick={onClose}>
-      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-fullscreen-sm-down" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content border-0 shadow-lg">
           {/* Header */}
           <div className="modal-header border-0" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
