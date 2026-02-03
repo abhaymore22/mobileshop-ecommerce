@@ -90,6 +90,33 @@
     height: 60px !important;
   }
 
+  /* Cart screen mobile layout */
+  .cart-item-row {
+    flex-direction: column !important;
+    padding: 15px 0 !important;
+  }
+
+  .cart-item-row > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    margin-bottom: 10px !important;
+  }
+
+  .cart-item-row .col-2,
+  .cart-item-row .col-4 {
+    text-align: left !important;
+  }
+
+  .cart-item-row img {
+    max-width: 80px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .cart-item-row .text-end {
+    text-align: left !important;
+  }
+
   /* Order details */
   .order-summary {
     font-size: 0.9rem !important;

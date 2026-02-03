@@ -102,7 +102,7 @@ function CartScreen() {
         </Message>
       ) : (
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-12 col-md-8 mb-3 mb-md-0">
             <div className="card">
               <div className="card-body">
                 {cart.items.map((item) => {
@@ -117,16 +117,17 @@ function CartScreen() {
                   const discountedPrice = price - (price * discount / 100);
                   
                   return (
-                    <div key={product._id} className="row align-items-center mb-3 pb-3 border-bottom">
-                      <div className="col-2">
-                        <img src={imageUrl} alt={product.modelName} className="img-fluid rounded" />
+                    <div key={product._id} className="row align-items-center mb-3 pb-3 border-bottom cart-item-row">
+                      <div className="col-12 col-md-2 mb-2 mb-md-0">
+                        <img src={imageUrl} alt={product.modelName} className="img-fluid rounded" style={{ maxWidth: '100px' }} />
                       </div>
-                      <div className="col-4">
+                      <div className="col-12 col-md-4 mb-2 mb-md-0">
                         <Link to={`/product/${product._id}`} className="text-decoration-none">
-                          <h6>{product.brand} {product.modelName}</h6>
+                          <h6 className="mb-0">{product.brand} {product.modelName}</h6>
                         </Link>
                       </div>
-                      <div className="col-2">
+                      <div className="col-6 col-md-2 mb-2 mb-md-0">
+                        <small className="text-muted d-md-none">Price:</small>
                         <p className="mb-0 fw-bold">RS {discountedPrice.toFixed(2)}</p>
                         {discount > 0 && (
                           <small className="text-muted text-decoration-line-through">
@@ -134,7 +135,8 @@ function CartScreen() {
                           </small>
                         )}
                       </div>
-                      <div className="col-2">
+                      <div className="col-6 col-md-2 mb-2 mb-md-0">
+                        <small className="text-muted d-md-none">Quantity:</small>
                         <select
                           className="form-select form-select-sm"
                           value={item.qty}
@@ -147,7 +149,7 @@ function CartScreen() {
                           ))}
                         </select>
                       </div>
-                      <div className="col-2 text-end">
+                      <div className="col-12 col-md-2 text-md-end mt-2 mt-md-0">
                         <button
                           className="btn btn-sm btn-danger"
                           onClick={() => handleRemove(product._id)}
@@ -162,7 +164,7 @@ function CartScreen() {
             </div>
           </div>
           
-          <div className="col-md-4">
+          <div className="col-12 col-md-4">
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">Order Summary</h5>
