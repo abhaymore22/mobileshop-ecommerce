@@ -673,4 +673,4 @@ export const sendContactStatusUpdateEmail = async (contact, oldStatus) => {
   }
 };
 
-export default transporter;
+export default sgMail;
