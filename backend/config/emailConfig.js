@@ -1,37 +1,21 @@
-import nodemailer from 'nodemailer';
+import sgMail from '@sendgrid/mail';
 
-// Create email transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com',
-    pass: process.env.EMAIL_PASSWORD || 'wkbb sibn ovhk azzd'
-  }
-});
+// Configure SendGrid
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Verify transporter configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('❌ Email configuration error:', error.message);
-    console.error('📋 Please verify:');
-    console.error('   1. Gmail address is correct');
-    console.error('   2. 2-Step Verification is enabled on your Google Account');
-    console.error('   3. App Password is valid (generate new one if needed)');
-    console.error('   4. You can use app password WITH spaces as provided by Google');
-  } else {
-    console.log('✅ Email server is ready to send messages');
-    console.log('📧 Sending from:', process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com');
-  }
-});
+// Verify SendGrid configuration
+if (process.env.SENDGRID_API_KEY) {
+  console.log('✅ SendGrid is configured');
+  console.log('📧 Sending from:', process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com');
+} else {
+  console.error('❌ SENDGRID_API_KEY is not set');
+}
 
 // Send OTP verification email
 export const sendVerificationEmail = async (email, name, otp) => {
-  const mailOptions = {
-    from: {
-      name: 'MobileShop',
-      address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
-    },
+  const msg = {
     to: email,
+    from: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com',
     subject: 'Verify Your Email - MobileShop',
     html: `
       <!DOCTYPE html>
@@ -133,23 +117,23 @@ export const sendVerificationEmail = async (email, name, otp) => {
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('✅ OTP verification email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
+    await sgMail.send(msg);
+    console.log('✅ OTP verification email sent to:', email);
+    return { success: true };
   } catch (error) {
-    console.error('❌ Error sending OTP verification email:', error);
+    console.error('❌ Failed to send OTP verification email:', error);
+    if (error.response) {
+      console.error('SendGrid error:', error.response.body);
+    }
     throw error;
   }
 };
 
 // Send welcome email after verification
 export const sendWelcomeEmail = async (email, name) => {
-  const mailOptions = {
-    from: {
-      name: 'MobileShop',
-      address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
-    },
+  const msg = {
     to: email,
+    from: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com',
     subject: 'Welcome to MobileShop! 🎉',
     html: `
       <!DOCTYPE html>
@@ -231,23 +215,23 @@ export const sendWelcomeEmail = async (email, name) => {
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Welcome email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
+    await sgMail.send(msg);
+    console.log('✅ Welcome email sent to:', email);
+    return { success: true };
   } catch (error) {
-    console.error('❌ Error sending welcome email:', error);
+    console.error('❌ Failed to send welcome email:', error);
+    if (error.response) {
+      console.error('SendGrid error:', error.response.body);
+    }
     throw error;
   }
 };
 
 // Send password reset OTP email
 export const sendPasswordResetOTP = async (email, name, otp) => {
-  const mailOptions = {
-    from: {
-      name: 'MobileShop',
-      address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
-    },
+  const msg = {
     to: email,
+    from: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com',
     subject: 'Password Reset Request - MobileShop',
     html: `
       <!DOCTYPE html>
@@ -353,7 +337,7 @@ export const sendPasswordResetOTP = async (email, name, otp) => {
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
+    await sgMail.send(msg);
     console.log('✅ Password reset OTP email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
@@ -373,7 +357,7 @@ export const sendOrderConfirmationEmail = async (order) => {
   
   const orderUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/orders/${order._id}`;
   
-  const mailOptions = {
+  const msg = {
     from: {
       name: 'MobileShop',
       address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
@@ -441,7 +425,7 @@ export const sendOrderConfirmationEmail = async (order) => {
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
+    await sgMail.send(msg);
     console.log('✅ Order confirmation email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
@@ -468,7 +452,7 @@ export const sendOrderStatusUpdateEmail = async (order, oldStatus, newStatus) =>
     'Cancelled': 'Your order has been cancelled. If you did not request this, please contact us immediately.'
   };
   
-  const mailOptions = {
+  const msg = {
     from: {
       name: 'MobileShop',
       address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
@@ -522,7 +506,7 @@ export const sendOrderStatusUpdateEmail = async (order, oldStatus, newStatus) =>
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
+    await sgMail.send(msg);
     console.log('✅ Order status update email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
@@ -536,7 +520,7 @@ export const sendContactAcknowledgmentEmail = async (contact) => {
   const email = contact.email;
   const name = contact.name;
   
-  const mailOptions = {
+  const msg = {
     from: {
       name: 'MobileShop Support',
       address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
@@ -596,7 +580,7 @@ export const sendContactAcknowledgmentEmail = async (contact) => {
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
+    await sgMail.send(msg);
     console.log('✅ Contact acknowledgment email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
@@ -611,7 +595,7 @@ export const sendContactStatusUpdateEmail = async (contact, oldStatus) => {
   const name = contact.name;
   const response = contact.response;
   
-  const mailOptions = {
+  const msg = {
     from: {
       name: 'MobileShop Support',
       address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
@@ -680,7 +664,7 @@ export const sendContactStatusUpdateEmail = async (contact, oldStatus) => {
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
+    await sgMail.send(msg);
     console.log('✅ Contact status update email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
