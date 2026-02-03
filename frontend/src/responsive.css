@@ -1,0 +1,260 @@
+/* Mobile Responsive Fixes */
+
+/* Base responsive improvements */
+@media (max-width: 768px) {
+  /* Reduce container padding on mobile */
+  .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  /* Hero carousel adjustments */
+  .carousel-item > div {
+    height: auto !important;
+    min-height: 400px !important;
+    padding: 30px 0 !important;
+  }
+
+  .carousel-item .display-3 {
+    font-size: 2rem !important;
+  }
+
+  .carousel-item .lead {
+    font-size: 1.1rem !important;
+  }
+
+  .carousel-item [style*="15rem"] {
+    font-size: 8rem !important;
+  }
+
+  /* Navbar fixes */
+  .navbar-brand {
+    font-size: 1.3rem !important;
+  }
+
+  /* Search bar mobile */
+  .navbar .form-control {
+    font-size: 14px !important;
+    width: 100% !important;
+  }
+
+  /* Product card responsive */
+  .card-img-top {
+    height: 200px !important;
+  }
+
+  /* Product detail images */
+  .product-detail-image {
+    max-height: 300px !important;
+  }
+
+  /* Admin dashboard tables */
+  .table-responsive {
+    font-size: 0.85rem !important;
+  }
+
+  .table td, .table th {
+    padding: 0.5rem !important;
+    white-space: nowrap;
+  }
+
+  /* Buttons */
+  .btn {
+    font-size: 0.9rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .btn-lg {
+    font-size: 1rem !important;
+    padding: 0.6rem 1.5rem !important;
+  }
+
+  /* Modal adjustments */
+  .modal-dialog {
+    margin: 10px !important;
+  }
+
+  .modal-content {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  /* Forms */
+  .form-control, .form-select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+
+  /* Cart page */
+  .cart-item-image {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  /* Order details */
+  .order-summary {
+    font-size: 0.9rem !important;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 20px 0 !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Category grid */
+  .category-card {
+    margin-bottom: 15px !important;
+  }
+
+  /* Horizontal scrolling prevention */
+  body, html {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  /* Images should not exceed container */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Prevent text overflow */
+  h1, h2, h3, h4, h5, h6, p {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Admin panel specific fixes */
+  .admin-stats-card {
+    margin-bottom: 15px !important;
+  }
+
+  .admin-actions {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .admin-actions .btn {
+    width: 100% !important;
+  }
+}
+
+/* Extra small devices (phones in portrait, less than 576px) */
+@media (max-width: 576px) {
+  .display-1 {
+    font-size: 2.5rem !important;
+  }
+
+  .display-2 {
+    font-size: 2rem !important;
+  }
+
+  .display-3 {
+    font-size: 1.75rem !important;
+  }
+
+  .display-4 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Product card even smaller */
+  .card-img-top {
+    height: 180px !important;
+  }
+
+  /* Reduce padding */
+  .p-5 {
+    padding: 1.5rem !important;
+  }
+
+  .p-4 {
+    padding: 1rem !important;
+  }
+
+  .py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Navigation adjustments */
+  .navbar-nav {
+    margin-top: 10px !important;
+  }
+
+  .nav-link {
+    padding: 8px 0 !important;
+  }
+
+  /* Badge sizes */
+  .badge {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Landscape mode for small devices */
+@media (max-width: 768px) and (orientation: landscape) {
+  .carousel-item > div {
+    min-height: 300px !important;
+  }
+
+  .carousel-item [style*="8rem"], .carousel-item [style*="15rem"] {
+    display: none !important;
+  }
+}
+
+/* Tablet adjustments (768px to 992px) */
+@media (min-width: 768px) and (max-width: 992px) {
+  .carousel-item > div {
+    height: 400px !important;
+  }
+
+  .display-3 {
+    font-size: 2.5rem !important;
+  }
+
+  .lead {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* Fix for very wide content */
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.container-fluid {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+/* Ensure proper spacing on all screen sizes */
+@media (max-width: 768px) {
+  .mb-5 {
+    margin-bottom: 2rem !important;
+  }
+
+  .mt-5 {
+    margin-top: 2rem !important;
+  }
+
+  .my-5 {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+}
+
+/* Chat button mobile positioning */
+@media (max-width: 768px) {
+  .chatbot-button {
+    bottom: 70px !important;
+    right: 15px !important;
+  }
+
+  .chatbot-container {
+    width: 95% !important;
+    max-width: 95% !important;
+    bottom: 70px !important;
+    right: 2.5% !important;
+  }
+}
