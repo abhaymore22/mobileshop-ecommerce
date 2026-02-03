@@ -338,10 +338,13 @@ export const sendPasswordResetOTP = async (email, name, otp) => {
 
   try {
     await sgMail.send(msg);
-    console.log('✅ Password reset OTP email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
+    console.log('✅ Password reset OTP email sent to:', email);
+    return { success: true };
   } catch (error) {
-    console.error('❌ Error sending password reset OTP email:', error);
+    console.error('❌ Failed to send password reset OTP email:', error);
+    if (error.response) {
+      console.error('SendGrid error:', error.response.body);
+    }
     throw error;
   }
 };
@@ -358,11 +361,8 @@ export const sendOrderConfirmationEmail = async (order) => {
   const orderUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/orders/${order._id}`;
   
   const msg = {
-    from: {
-      name: 'MobileShop',
-      address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
-    },
     to: email,
+    from: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com',
     subject: `Order Confirmation - Order #${order._id.toString().slice(-8).toUpperCase()}`,
     html: `
       <!DOCTYPE html>
@@ -426,10 +426,13 @@ export const sendOrderConfirmationEmail = async (order) => {
 
   try {
     await sgMail.send(msg);
-    console.log('✅ Order confirmation email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
+    console.log('✅ Order confirmation email sent to:', email);
+    return { success: true };
   } catch (error) {
-    console.error('❌ Error sending order confirmation email:', error);
+    console.error('❌ Failed to send order confirmation email:', error);
+    if (error.response) {
+      console.error('SendGrid error:', error.response.body);
+    }
     throw error;
   }
 };
@@ -453,11 +456,8 @@ export const sendOrderStatusUpdateEmail = async (order, oldStatus, newStatus) =>
   };
   
   const msg = {
-    from: {
-      name: 'MobileShop',
-      address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
-    },
     to: email,
+    from: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com',
     subject: `Order Status Update - #${order._id.toString().slice(-8).toUpperCase()}`,
     html: `
       <!DOCTYPE html>
@@ -507,10 +507,13 @@ export const sendOrderStatusUpdateEmail = async (order, oldStatus, newStatus) =>
 
   try {
     await sgMail.send(msg);
-    console.log('✅ Order status update email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
+    console.log('✅ Order status update email sent to:', email);
+    return { success: true };
   } catch (error) {
-    console.error('❌ Error sending order status update email:', error);
+    console.error('❌ Failed to send order status update email:', error);
+    if (error.response) {
+      console.error('SendGrid error:', error.response.body);
+    }
     throw error;
   }
 };
@@ -521,11 +524,8 @@ export const sendContactAcknowledgmentEmail = async (contact) => {
   const name = contact.name;
   
   const msg = {
-    from: {
-      name: 'MobileShop Support',
-      address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
-    },
     to: email,
+    from: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com',
     subject: `We received your query - Ticket #${contact._id.toString().slice(-6).toUpperCase()}`,
     html: `
       <!DOCTYPE html>
@@ -581,10 +581,13 @@ export const sendContactAcknowledgmentEmail = async (contact) => {
 
   try {
     await sgMail.send(msg);
-    console.log('✅ Contact acknowledgment email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
+    console.log('✅ Contact acknowledgment email sent to:', email);
+    return { success: true };
   } catch (error) {
-    console.error('❌ Error sending contact acknowledgment email:', error);
+    console.error('❌ Failed to send contact acknowledgment email:', error);
+    if (error.response) {
+      console.error('SendGrid error:', error.response.body);
+    }
     throw error;
   }
 };
@@ -596,11 +599,8 @@ export const sendContactStatusUpdateEmail = async (contact, oldStatus) => {
   const response = contact.response;
   
   const msg = {
-    from: {
-      name: 'MobileShop Support',
-      address: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com'
-    },
     to: email,
+    from: process.env.EMAIL_USER || 'moreacademyabhaymore@gmail.com',
     subject: `Update on your query - Ticket #${contact._id.toString().slice(-6).toUpperCase()}`,
     html: `
       <!DOCTYPE html>
@@ -665,10 +665,13 @@ export const sendContactStatusUpdateEmail = async (contact, oldStatus) => {
 
   try {
     await sgMail.send(msg);
-    console.log('✅ Contact status update email sent:', info.messageId);
-    return { success: true, messageId: info.messageId };
+    console.log('✅ Contact status update email sent to:', email);
+    return { success: true };
   } catch (error) {
-    console.error('❌ Error sending contact status update email:', error);
+    console.error('❌ Failed to send contact status update email:', error);
+    if (error.response) {
+      console.error('SendGrid error:', error.response.body);
+    }
     throw error;
   }
 };
