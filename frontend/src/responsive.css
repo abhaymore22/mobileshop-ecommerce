@@ -1,5 +1,15 @@
 /* Mobile Responsive Fixes */
 
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Base responsive improvements */
 @media (max-width: 768px) {
   /* Reduce container padding on mobile */
@@ -163,6 +173,62 @@
 
   .admin-actions .btn {
     width: 100% !important;
+  }
+
+  /* Admin Panel Responsive Styles */
+  .admin-sidebar {
+    width: 85% !important;
+    max-width: 320px !important;
+  }
+
+  .admin-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .admin-page-content {
+    padding: 1rem !important;
+  }
+
+  /* Admin navbar adjustments */
+  .admin-content .navbar h4 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Admin tables responsive */
+  .admin-page-content .table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .admin-page-content .table {
+    font-size: 0.8rem !important;
+  }
+
+  .admin-page-content .table th,
+  .admin-page-content .table td {
+    padding: 0.5rem 0.3rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* Admin buttons in actions */
+  .admin-page-content .btn-sm {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+
+  /* Admin cards stacking */
+  .admin-page-content .row [class*='col-md'] {
+    margin-bottom: 1rem !important;
+  }
+
+  /* Admin modals */
+  .admin-page-content .modal-body {
+    padding: 1rem !important;
+  }
+
+  .admin-page-content .modal-title {
+    font-size: 1.1rem !important;
   }
 }
 
