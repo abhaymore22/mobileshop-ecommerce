@@ -118,10 +118,64 @@ function AdminUsersScreen() {
       {loading ? (
         <Loader />
       ) : (
-        <div className="card">
-          <div className="card-body">
-            <div className="table-responsive">
-              <table className="table table-striped">
+        <>
+          {/* Mobile Card View */}
+          <div className="d-lg-none">
+            {getSortedUsers().map((user) => (
+              <div key={user._id} className="card mb-3 shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between align-items-start mb-3">
+                    <div className="flex-grow-1">
+                      <h6 className="card-title mb-1">{user.name}</h6>
+                      <p className="text-muted small mb-1">{user.email}</p>
+                      <p className="text-muted small mb-0">{user.phone || 'No phone'}</p>
+                    </div>
+                    <span className={`badge bg-${
+                      user.role === 'admin' ? 'danger' :
+                      user.role === 'staff' ? 'warning' :
+                      'primary'
+                    }`}>
+                      {user.role.toUpperCase()}
+                    </span>
+                  </div>
+                  
+                  <div className="mb-3">
+                    <small className="text-muted">Joined: {new Date(user.createdAt).toLocaleDateString()}</small>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label small mb-1">Change Role</label>
+                    <select
+                      className="form-select form-select-sm"
+                      value={user.role}
+                      onChange={(e) => handleRoleChange(user._id, e.target.value)}
+                      disabled={user._id === userInfo._id}
+                    >
+                      <option value="user">User</option>
+                      <option value="staff">Staff</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+
+                  <button
+                    className="btn btn-sm btn-danger w-100"
+                    onClick={() => handleDeleteUser(user._id)}
+                    disabled={user._id === userInfo._id}
+                  >
+                    {user._id === userInfo._id ? 'Cannot Delete Self' : (
+                      <><i className="bi bi-trash"></i> Delete User</>
+                    )}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table View */}
+          <div className="card d-none d-lg-block">
+            <div className="card-body">
+              <div className="table-responsive">
+                <table className="table table-striped table-hover">
                 <thead>
                   <tr>
                     <th 
@@ -197,6 +251,7 @@ function AdminUsersScreen() {
             </div>
           </div>
         </div>
+        </>
       )}
     </AdminLayout>
   );
