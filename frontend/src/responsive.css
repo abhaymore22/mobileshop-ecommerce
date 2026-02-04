@@ -447,6 +447,47 @@
   .chatbot-window .card {
     border-radius: 0 !important;
     height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Fix messages area on mobile */
+  .chatbot-messages {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  /* Reduce spacing in welcome section on mobile */
+  .chatbot-welcome .card-body {
+    padding: 0.75rem !important;
+  }
+
+  .chatbot-welcome .mb-2 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Compact quick questions on mobile */
+  .chatbot-welcome .d-grid.gap-2 {
+    gap: 0.5rem !important;
+  }
+
+  .chatbot-welcome .btn-sm {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Card footer (input area) */
+  .chatbot-window .card-footer {
+    padding: 0.75rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Card header */
+  .chatbot-window .card-header {
+    padding: 0.75rem 1rem !important;
+    flex-shrink: 0 !important;
   }
 }
 
