@@ -15,6 +15,19 @@ function Navbar() {
   const { activeCategories } = useSelector((state) => state.categories);
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Function to close navbar on mobile
+  const closeNavbar = () => {
+    const navbarCollapse = document.getElementById('navbarNav');
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+      const bsCollapse = window.bootstrap?.Collapse.getInstance(navbarCollapse);
+      if (bsCollapse) {
+        bsCollapse.hide();
+      } else {
+        navbarCollapse.classList.remove('show');
+      }
+    }
+  };
+
   useEffect(() => {
     dispatch(fetchActiveCategories());
   }, [dispatch]);
@@ -67,12 +80,12 @@ function Navbar() {
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <Link className="dropdown-item" to="/products">All Products</Link>
+                  <Link className="dropdown-item" to="/products" onClick={closeNavbar}>All Products</Link>
                 </li>
                 <li><hr className="dropdown-divider" /></li>
                 {activeCategories.map((cat) => (
                   <li key={cat._id}>
-                    <Link className="dropdown-item" to={`/products?category=${cat._id}`}>
+                    <Link className="dropdown-item" to={`/products?category=${cat._id}`} onClick={closeNavbar}>
                       {cat.name}
                     </Link>
                   </li>
@@ -83,7 +96,7 @@ function Navbar() {
             {userInfo && (
               <>
                 <li className="nav-item">
-                  <Link className="nav-link position-relative fw-bold text-light" to="/cart" style={{ fontSize: '1.05rem' }}>
+                  <Link className="nav-link position-relative fw-bold text-light" to="/cart" onClick={closeNavbar} style={{ fontSize: '1.05rem' }}>
                     🛒 Cart
                     {cartItemsCount > 0 && (
                       <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style={{ fontSize: '0.7rem', fontWeight: 'bold' }}>
@@ -93,7 +106,7 @@ function Navbar() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link fw-bold text-light" to="/wishlist" style={{ fontSize: '1.05rem' }}>
+                  <Link className="nav-link fw-bold text-light" to="/wishlist" onClick={closeNavbar} style={{ fontSize: '1.05rem' }}>
                     ❤️ Wishlist
                   </Link>
                 </li>
@@ -112,17 +125,17 @@ function Navbar() {
                   {userInfo.name.split(' ')[0]}
                 </a>
                 <ul className="dropdown-menu" style={{ zIndex: 1050 }}>
-                  <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
-                  <li><Link className="dropdown-item" to="/orders">My Orders</Link></li>
+                  <li><Link className="dropdown-item" to="/profile" onClick={closeNavbar}>Profile</Link></li>
+                  <li><Link className="dropdown-item" to="/orders" onClick={closeNavbar}>My Orders</Link></li>
                   {(userInfo.role === 'admin' || userInfo.role === 'staff') && (
                     <>
                       <li><hr className="dropdown-divider" /></li>
-                      <li><Link className="dropdown-item" to="/admin/dashboard">Dashboard</Link></li>
+                      <li><Link className="dropdown-item" to="/admin/dashboard" onClick={closeNavbar}>Dashboard</Link></li>
                     </>
                   )}
                   <li><hr className="dropdown-divider" /></li>
                   <li>
-                    <button className="dropdown-item" onClick={handleLogout}>
+                    <button className="dropdown-item" onClick={() => { handleLogout(); closeNavbar(); }}>
                       Logout
                     </button>
                   </li>
@@ -130,7 +143,7 @@ function Navbar() {
               </li>
             ) : (
               <li className="nav-item">
-                <Link className="nav-link" to="/login">
+                <Link className="nav-link" to="/login" onClick={closeNavbar}>
                   <button className="btn btn-warning btn-sm fw-bold" style={{ borderRadius: '20px', padding: '0.5rem 1.5rem' }}>Login</button>
                 </Link>
               </li>
