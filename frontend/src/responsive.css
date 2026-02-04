@@ -251,6 +251,37 @@
     gap: 0.5rem !important;
   }
 
+  /* D-grid gap for mobile action buttons */
+  .admin-page-content .d-grid {
+    gap: 0.5rem !important;
+  }
+
+  /* Flex wrap for badges */
+  .admin-page-content .flex-wrap {
+    gap: 0.25rem !important;
+  }
+
+  /* Card spacing for products and orders */
+  .admin-page-content .card.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  }
+
+  /* Form selects in cards */
+  .admin-page-content .form-select-sm {
+    font-size: 0.875rem !important;
+  }
+
+  /* Order/Product card images */
+  .admin-page-content .card-body img.rounded {
+    border-radius: 0.5rem !important;
+  }
+
+  /* Responsive badges in cards */
+  .admin-page-content .badge {
+    font-size: 0.75rem !important;
+    padding: 0.35em 0.65em !important;
+  }
+
   /* Modal responsiveness */
   .modal-dialog {
     margin: 0.5rem !important;
@@ -260,9 +291,20 @@
   .modal-dialog-centered {
     min-height: calc(100vh - 1rem) !important;
   }
+
+  /* Modal body padding on mobile */
+  .modal-body .row {
+    margin-left: -0.5rem !important;
+    margin-right: -0.5rem !important;
+  }
+
+  .modal-body .row > [class*='col-'] {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
 }
 
-/* Tablet adjustments for admin categories */
+/* Tablet adjustments for admin pages */
 @media (min-width: 768px) and (max-width: 991px) {
   .admin-page-content .card {
     margin-bottom: 1rem !important;
@@ -270,6 +312,12 @@
 
   .admin-page-content .btn-sm {
     font-size: 0.8rem !important;
+  }
+
+  /* Product/Order cards on tablet */
+  .admin-page-content .card-body img {
+    width: 100px !important;
+    height: 100px !important;
   }
 }
 

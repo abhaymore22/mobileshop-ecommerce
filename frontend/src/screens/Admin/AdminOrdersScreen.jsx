@@ -88,9 +88,63 @@ function AdminOrdersScreen() {
       ) : orders.length === 0 ? (
         <Message variant="info">No orders found</Message>
       ) : (
-        <div className="card">
-          <div className="card-body">
-            <div className="table-responsive">
+        <>
+          {/* Mobile Card View */}
+          <div className="d-lg-none">
+            {getSortedOrders().map((order) => (
+              <div key={order._id} className="card mb-3 shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                      <h6 className="card-title mb-1">Order #{order._id.substring(0, 8)}</h6>
+                      <p className="text-muted small mb-0">{order.userID?.name || 'N/A'}</p>
+                    </div>
+                    <span className="badge bg-success">RS {order.totalAmount.toFixed(2)}</span>
+                  </div>
+                  
+                  <div className="row g-2 mb-3">
+                    <div className="col-6">
+                      <small className="text-muted">Date</small>
+                      <p className="mb-0 small">{new Date(order.createdAt).toLocaleDateString()}</p>
+                    </div>
+                    <div className="col-6">
+                      <small className="text-muted">Payment</small>
+                      <br />
+                      <span className={`badge bg-${order.paymentStatus === 'Paid' ? 'success' : 'warning'}`}>
+                        {order.paymentStatus}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label small mb-1">Order Status</label>
+                    <select
+                      className="form-select form-select-sm"
+                      value={order.orderStatus}
+                      onChange={(e) => handleStatusChange(order._id, e.target.value, order.paymentStatus)}
+                    >
+                      <option value="Processing">Processing</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+                  </div>
+
+                  <button
+                    className="btn btn-sm btn-info w-100"
+                    onClick={() => handleViewDetails(order)}
+                  >
+                    <i className="bi bi-eye"></i> View Details
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table View */}
+          <div className="card d-none d-lg-block">
+            <div className="card-body">
+              <div className="table-responsive">
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -181,12 +235,13 @@ function AdminOrdersScreen() {
             </div>
           </div>
         </div>
+        </>
       )}
 
       {/* Order Details Modal */}
       {showModal && selectedOrder && (
-        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog modal-lg modal-dialog-scrollable">
+        <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Order Details - #{selectedOrder._id.substring(0, 8)}</h5>

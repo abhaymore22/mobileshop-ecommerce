@@ -174,10 +174,11 @@ function AdminProductsScreen() {
 
   return (
     <AdminLayout>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Manage Products</h2>
-        <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-          Add New Product
+      <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-4 gap-3">
+        <h2 className="mb-0">Manage Products</h2>
+        <button className="btn btn-primary w-100 w-sm-auto" onClick={() => setShowModal(true)}>
+          <span className="d-none d-sm-inline">Add New Product</span>
+          <span className="d-sm-none">+ Add Product</span>
         </button>
       </div>
 
@@ -185,9 +186,83 @@ function AdminProductsScreen() {
       {loading ? (
         <Loader />
       ) : (
-        <div className="card">
-          <div className="card-body">
-            <div className="table-responsive">
+        <>
+          {/* Mobile Card View */}
+          <div className="d-lg-none">
+            {getSortedProducts().map((product) => (
+              <div key={product._id} className="card mb-3 shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex align-items-start gap-3 mb-3">
+                    {product.images?.[0] && (
+                      <img
+                        src={product.images[0].startsWith('http') ? product.images[0] : `http://localhost:5000${product.images[0]}`}
+                        alt={product.modelName}
+                        className="rounded"
+                        style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+                      />
+                    )}
+                    <div className="flex-grow-1">
+                      <h6 className="card-title mb-1">{product.brand}</h6>
+                      <p className="text-muted small mb-2">{product.modelName}</p>
+                      <div className="d-flex gap-2 flex-wrap">
+                        <span className={`badge bg-${product.stock === 0 ? 'danger' : product.stock < 10 ? 'warning' : 'success'}`}>
+                          {product.stock} units
+                        </span>
+                        <span className={`badge bg-${product.isApproved ? 'success' : 'warning'}`}>
+                          {product.isApproved ? 'Approved' : 'Pending'}
+                        </span>
+                        <span className={`badge bg-${product.isActive ? 'success' : 'secondary'}`}>
+                          {product.isActive ? 'Active' : 'Inactive'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="d-flex justify-content-between align-items-center mb-3">
+                    <h5 className="text-success mb-0">RS {product.price}</h5>
+                  </div>
+
+                  <div className="d-grid gap-2">
+                    <button
+                      className="btn btn-sm btn-warning"
+                      onClick={() => handleEdit(product)}
+                    >
+                      <i className="bi bi-pencil"></i> Edit
+                    </button>
+                    {userInfo?.role === 'admin' && !product.isApproved && (
+                      <button
+                        className="btn btn-sm btn-success"
+                        onClick={() => handleApprove(product._id)}
+                      >
+                        <i className="bi bi-check-circle"></i> Approve
+                      </button>
+                    )}
+                    {userInfo?.role === 'admin' && (
+                      <div className="d-flex gap-2">
+                        <button
+                          className={`btn btn-sm flex-fill ${product.isActive ? 'btn-secondary' : 'btn-info'}`}
+                          onClick={() => handleToggleActive(product._id)}
+                        >
+                          {product.isActive ? 'Deactivate' : 'Activate'}
+                        </button>
+                        <button
+                          className="btn btn-sm btn-danger flex-fill"
+                          onClick={() => handleDelete(product._id)}
+                        >
+                          <i className="bi bi-trash"></i> Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table View */}
+          <div className="card d-none d-lg-block">
+            <div className="card-body">
+              <div className="table-responsive">
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -303,12 +378,13 @@ function AdminProductsScreen() {
             </div>
           </div>
         </div>
+        </>
       )}
 
       {/* Modal */}
       {showModal && (
-        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog modal-lg">
+        <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">{editMode ? 'Edit Product' : 'Add New Product'}</h5>
