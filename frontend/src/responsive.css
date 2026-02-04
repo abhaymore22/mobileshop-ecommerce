@@ -457,24 +457,38 @@
     min-height: 0 !important;
     max-height: none !important;
     height: auto !important;
+    padding: 0.75rem !important;
   }
 
   /* Reduce spacing in welcome section on mobile */
-  .chatbot-welcome .card-body {
-    padding: 0.75rem !important;
+  .chatbot-welcome {
+    margin: 0 !important;
+  }
+
+  .chatbot-welcome .bg-white {
+    padding: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .chatbot-welcome .mb-1 {
+    margin-bottom: 0.25rem !important;
   }
 
   .chatbot-welcome .mb-2 {
     margin-bottom: 0.5rem !important;
   }
 
+  .chatbot-welcome p.small {
+    font-size: 0.8rem !important;
+  }
+
   /* Compact quick questions on mobile */
   .chatbot-welcome .d-grid.gap-2 {
-    gap: 0.5rem !important;
+    gap: 0.4rem !important;
   }
 
   .chatbot-welcome .btn-sm {
-    padding: 0.5rem 0.75rem !important;
+    padding: 0.4rem 0.6rem !important;
     font-size: 0.8rem !important;
   }
 

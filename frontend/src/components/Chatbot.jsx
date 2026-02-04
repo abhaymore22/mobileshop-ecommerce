@@ -131,35 +131,34 @@ const Chatbot = () => {
             {/* Welcome Message */}
             {messages.length === 0 && (
               <div className="chatbot-welcome">
-                <div className="card border-0 shadow-sm mb-2">
-                  <div className="card-body p-3">
-                    <div className="d-flex align-items-start">
-                      <div
-                        className="flex-shrink-0 rounded-circle text-white d-flex align-items-center justify-content-center fw-bold me-2"
-                        style={{
-                          width: '35px',
-                          height: '35px',
-                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                          fontSize: '0.75rem'
-                        }}
-                      >
-                        <i className="bi bi-robot"></i>
-                      </div>
-                      <div className="flex-grow-1">
-                        <p className="mb-1 fw-semibold">
-                          Hello! {userInfo ? `Welcome back, ${userInfo.name}!` : 'Welcome!'} 👋
-                        </p>
-                        <p className="mb-0 small text-muted">
-                          I'm your virtual assistant. How can I help you today?
-                        </p>
-                      </div>
+                {/* Welcome Greeting */}
+                <div className="bg-white rounded shadow-sm p-2 mb-2">
+                  <div className="d-flex align-items-start">
+                    <div
+                      className="flex-shrink-0 rounded-circle text-white d-flex align-items-center justify-content-center fw-bold me-2"
+                      style={{
+                        width: '30px',
+                        height: '30px',
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        fontSize: '0.7rem'
+                      }}
+                    >
+                      <i className="bi bi-robot"></i>
+                    </div>
+                    <div className="flex-grow-1">
+                      <p className="mb-1 fw-semibold small">
+                        Hello! {userInfo ? `Welcome back, ${userInfo.name}!` : 'Welcome!'} 👋
+                      </p>
+                      <p className="mb-0 small text-muted">
+                        I'm your virtual assistant. How can I help you today?
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Quick Questions */}
-                <div className="mb-2">
-                  <p className="small text-muted fw-semibold mb-2 px-1">
+                <div>
+                  <p className="small text-muted fw-semibold mb-1 px-1">
                     <i className="bi bi-lightning-fill me-1"></i>Quick Questions
                   </p>
                   <div className="d-grid gap-2">
