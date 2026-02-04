@@ -138,11 +138,12 @@ function AdminCategoriesScreen() {
         />
       )}
       
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Manage Categories</h2>
+      <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-4 gap-3">
+        <h2 className="mb-0">Manage Categories</h2>
         {userInfo?.role === 'admin' && (
-          <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-            Add New Category
+          <button className="btn btn-primary w-100 w-sm-auto" onClick={() => setShowModal(true)}>
+            <span className="d-none d-sm-inline">Add New Category</span>
+            <span className="d-sm-none">+ Add Category</span>
           </button>
         )}
       </div>
@@ -151,79 +152,125 @@ function AdminCategoriesScreen() {
       {loading ? (
         <Loader />
       ) : (
-        <div className="card">
-          <div className="card-body">
-            <div className="table-responsive">
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Image</th>
-                    <th 
-                      onClick={() => handleSort('name')} 
-                      style={{ cursor: 'pointer', userSelect: 'none' }}
-                    >
-                      Name <SortIcon field="name" />
-                    </th>
-                    <th 
-                      onClick={() => handleSort('isActive')} 
-                      style={{ cursor: 'pointer', userSelect: 'none' }}
-                    >
-                      Status <SortIcon field="isActive" />
-                    </th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {getSortedCategories().map((category) => (
-                    <tr key={category._id}>
-                      <td>
-                        {category.imagePath && (
-                          <img
-                            src={category.imagePath.startsWith('http') ? category.imagePath : `http://localhost:5000${category.imagePath}`}
-                            alt={category.name}
-                            style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-                          />
-                        )}
-                      </td>
-                      <td>{category.name}</td>
-                      <td>
-                        <span className={`badge bg-${category.isActive ? 'success' : 'secondary'}`}>
-                          {category.isActive ? 'Active' : 'Inactive'}
-                        </span>
-                      </td>
-                      <td>
-                        {userInfo?.role === 'admin' ? (
-                          <>
-                            <button
-                              className="btn btn-sm btn-warning me-2"
-                              onClick={() => handleEdit(category)}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="btn btn-sm btn-danger"
-                              onClick={() => handleDelete(category._id)}
-                            >
-                              Delete
-                            </button>
-                          </>
-                        ) : (
-                          <span className="badge bg-secondary">View Only</span>
-                        )}
-                      </td>
+        <>
+          {/* Mobile Card View */}
+          <div className="d-lg-none">
+            {getSortedCategories().map((category) => (
+              <div key={category._id} className="card mb-3 shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex align-items-start gap-3 mb-3">
+                    {category.imagePath && (
+                      <img
+                        src={category.imagePath.startsWith('http') ? category.imagePath : `http://localhost:5000${category.imagePath}`}
+                        alt={category.name}
+                        className="rounded"
+                        style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+                      />
+                    )}
+                    <div className="flex-grow-1">
+                      <h5 className="card-title mb-2">{category.name}</h5>
+                      <span className={`badge bg-${category.isActive ? 'success' : 'secondary'}`}>
+                        {category.isActive ? 'Active' : 'Inactive'}
+                      </span>
+                    </div>
+                  </div>
+                  {userInfo?.role === 'admin' && (
+                    <div className="d-flex gap-2">
+                      <button
+                        className="btn btn-sm btn-warning flex-fill"
+                        onClick={() => handleEdit(category)}
+                      >
+                        <i className="bi bi-pencil"></i> Edit
+                      </button>
+                      <button
+                        className="btn btn-sm btn-danger flex-fill"
+                        onClick={() => handleDelete(category._id)}
+                      >
+                        <i className="bi bi-trash"></i> Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table View */}
+          <div className="card d-none d-lg-block">
+            <div className="card-body">
+              <div className="table-responsive">
+                <table className="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th 
+                        onClick={() => handleSort('name')} 
+                        style={{ cursor: 'pointer', userSelect: 'none' }}
+                      >
+                        Name <SortIcon field="name" />
+                      </th>
+                      <th 
+                        onClick={() => handleSort('isActive')} 
+                        style={{ cursor: 'pointer', userSelect: 'none' }}
+                      >
+                        Status <SortIcon field="isActive" />
+                      </th>
+                      <th>Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {getSortedCategories().map((category) => (
+                      <tr key={category._id}>
+                        <td>
+                          {category.imagePath && (
+                            <img
+                              src={category.imagePath.startsWith('http') ? category.imagePath : `http://localhost:5000${category.imagePath}`}
+                              alt={category.name}
+                              className="rounded"
+                              style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                            />
+                          )}
+                        </td>
+                        <td>{category.name}</td>
+                        <td>
+                          <span className={`badge bg-${category.isActive ? 'success' : 'secondary'}`}>
+                            {category.isActive ? 'Active' : 'Inactive'}
+                          </span>
+                        </td>
+                        <td>
+                          {userInfo?.role === 'admin' ? (
+                            <>
+                              <button
+                                className="btn btn-sm btn-warning me-2"
+                                onClick={() => handleEdit(category)}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="btn btn-sm btn-danger"
+                                onClick={() => handleDelete(category._id)}
+                              >
+                                Delete
+                              </button>
+                            </>
+                          ) : (
+                            <span className="badge bg-secondary">View Only</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
 
       {/* Modal */}
       {showModal && (
-        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog">
+        <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">{editMode ? 'Edit Category' : 'Add New Category'}</h5>
